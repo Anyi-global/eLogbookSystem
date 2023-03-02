@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+    <title>Register</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+  
+      <!-- Favicons -->
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/aos/aos.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/remixicon/remixicon.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    body {
+        font-family: serif;
+        background-image: linear-gradient(120deg, green, rgb(202, 202, 63));
+    }
+</style>
+
+
+</head>
+<body>
+            <div class="container">
+
+                <div class="row mt-4">
+
+                    <div class="col-sm-12 col-md-3"></div>
+
+                    <div class="col-sm-12 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img src="{{ url_for('static', filename='img/fuo logo1.png') }}" alt="FUO Logo" style="height: 30%; width: 30%; ">
+                                    <div class="h2 text-center pt-3 text-success">Login</div>
+                                </div>
+                                <hr>
+                                <form action="" method="post">
+            
+                                    <!-- <div class="text">
+                                        <label for="username">Student id</label><br>
+                                        <input type="radio" placeholder="Enter your User Id" name="username" required><br>
+                                    </div> -->
+                        
+                                    <!-- <div class="form-outline mb-3 mt-4">
+                                        <label class="form-label" for="form2Example17" style="font-weight: 700;">User-Type</label>
+                                      <input type="email" id="form2Example17" placeholder="Enter Matric. Number" class="form-control form-control-md" />
+                                      <select class="form-select" aria-label="Default select example">
+                                        <option selected>Select User</option>
+                                        <option value="1">Lecturer</option>
+                                        <option value="2">Admin</option>
+                                      </select>
+                                    </div> -->
+                                
+                                    <div class="form-outline mb-3">
+                                        <label class="form-label" for="form2Example17" style="font-weight: 700;">Staff. Number</label>
+                                      <input type="text" id="form2Example17" name="staff_number" placeholder="Enter Staff. Number" class="form-control form-control-md" required/>
+                                    </div>
+                                    
+                                    <div class="form-outline mb-3">
+                                        <label class="form-label" for="form2Example27" style="font-weight: 700;">Password</label>
+                                      <input type="password" id="form2Example27" name="password" placeholder="Enter Password" class="form-control form-control-md" required/>   
+                                    </div>
+                                    
+                                    <div><a href="#" class="font-weight-bold mb-3">Forgot Password?</div>
+                                    
+                                    <div><button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 20px">Login</button></div>    
+                                    
+                                    <div class="pt-2 pb-3 text-decoration-none">Don't have an account? <a href="/">Sign Up</a></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-3"></div>
+
+                </div>
+        
+            </div>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename="vendor/purecounter/purecounter.js") }}"></script>
+  <script src="{{ url_for('static', filename="vendor/aos/aos.js") }}"></script>
+  <script src="{{ url_for('static', filename="vendor/bootstrap/js/bootstrap.bundle.min.js") }}"></script>
+  <script src="{{ url_for('static', filename="vendor/glightbox/js/glightbox.min.js") }}"></script>
+  <script src="{{ url_for('static', filename="vendor/isotope-layout/isotope.pkgd.min.js") }}"></script>
+  <script src="{{ url_for('static', filename="vendor/swiper/swiper-bundle.min.js") }}"></script>
+  <script src="{{ url_for('static', filename="vendor/php-email-form/validate.js") }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename="js/main.js") }}"></script>
+
+</body>
+</html>
