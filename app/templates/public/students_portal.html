@@ -9,8 +9,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="/" class="logo d-flex align-items-center">
-        <img src="{{ url_for('static', filename='img/fuo logo1.png') }}" alt="FUO Logo">
-        <span class="d-none d-lg-block" style="font-family: 'Times New Roman', Times, serif; font-size: 30px; color: green;">CSI<span style="font-family: 'Times New Roman', Times, serif; font-style: italic;">SIS</span></span>
+        <!-- <img src="{{ url_for('static', filename='img/fuo logo1.png') }}" alt="FUO Logo"> -->
+        <span class="d-none d-lg-block" style="font-family: 'Times New Roman', Times, serif; font-size: 30px; color: rgb(130, 171, 190);">Pet<span style="font-family: 'Times New Roman', Times, serif; font-style: italic;">Finder</span></span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -25,12 +25,12 @@
     <nav class="header-nav ms-auto">
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="{{ url_for('static', filename='img/avatar.png') }}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Ike Ifeanyi</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">Abiye Julius</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Ike Ifeanyi</h6>
+              <h6>Abiye Julius</h6>
               <span>Web Designer</span>
             </li>
             <li>
@@ -110,59 +110,26 @@
   
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-pen-fill"></i><span>Assignment</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="fas fa-dog"></i><span>Find Your Pet</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-              <a href="/all-given-assignments">
-                <i class="bi bi-circle-fill"></i><span>All Given Assignments</span>
-              </a>
-            </li>
-            <li>
-              <a href="/assignment-answer-submission">
-                <i class="bi bi-circle-fill"></i><span>Submit Assignment</span>
-              </a>
-            </li>
-            <li>
-              <a href="/view-assignment-score">
-                <i class="bi bi-circle-fill"></i><span>View Assignment Score</span>
+              <a href="/add-missing-pet">
+                <i class="fas fa-dog"></i><span>Report Missing Pets</span>
               </a>
             </li>
           </ul>
         </li>
         <!-- End Forms Nav -->
   
-        <!-- <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-layout-text-window-reverse"></i><span>Attendance Record</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="tables-general.html">
-                <i class="bi bi-circle-fill"></i><span>All Records</span>
-              </a>
-            </li>
-            <li>
-              <a href="tables-data.html">
-                <i class="bi bi-circle-fill"></i><span>Add Record</span>
-              </a>
-            </li> -->
-            <!-- <li>
-              <a href="tables-general.html">
-                <i class="bi bi-circle-fill"></i><span>Edit Courses</span>
-              </a>
-            </li> -->
-          <!-- </ul>
-        </li> -->
-        
         <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-upload"></i><span>Course Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+            <i class="fas fa-cat"></i><span>Found Pets</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
           <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-              <a href="/upload-course-form">
-                <i class="bi bi-circle-fill"></i><span>Upload Course Forms</span>
+              <a href="/all-pets-found">
+                <i class="fas fa-cat"></i><span>All Found Pets</span>
               </a>
             </li>
           </ul>
@@ -182,7 +149,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Students Panel</h1>
+      <h1>Users Panel</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ url_for('students_dashboard') }}"><i class="bi bi-house-fill"></i><span>Home</span></a></li>
@@ -238,15 +205,13 @@
           <div class="row">
             <div class="card">
               <div class="card-body">
-                <h2 class="card-title text-center fw-bold">WELCOME, <span>{{ session.user.last_name }} {{ session.user.first_name }}</span></h2>
+                <h2 class="card-title text-center fw-bold">WELCOME, <span>{{ session.user.username.title() }}</span></h2>
                 <hr>
-                <p class="card-text"><h6 class="fw-bold">Matric. Number:</h6> {{ session.user.matric_number }}</p>
+                <p class="card-text"><h6 class="fw-bold">Username:</h6> {{ session.user.username.title() }}</p>
                 <hr>
-                <p><h6 class="fw-bold">Level:</h6> </p>
                 <hr>
                 <p><h6 class="fw-bold">Email:</h6> {{ session.user.email }}</p>
                 <hr>
-                <p><h6 class="fw-bold">Phone Number:</h6> </p>
                 <hr>
                 <a href="/student-profile" class="btn btn-primary text-white"><i class="bi bi-pencil p-2"></i>Edit Profile</a>
               </div>
@@ -254,7 +219,7 @@
 
             <div class="card mt-3">
               <div class="card-body m-3">
-                <p class="card-text">Dear <strong><em>{{ session.user.first_name.title() }}</em></strong>, please kindly use the options in the <em><strong>left pane</strong> </em> and get your tasks done here! Thanks!!</p>
+                <p class="card-text">Dear <strong><em>{{ session.user.username.title() }}</em></strong>, Find your missing pets using the options in the <em><strong>left pane</strong></em></p>
               </div>
             </div>
 
@@ -266,74 +231,56 @@
       <div class="col-12">
         <div class="card recent-sales overflow-auto mt-3">
           <div class="card-body">
-            <!-- <h5 class="card-title" style="font-weight: 700; font-family: 'Times New Roman', Times, serif; padding-bottom: 0px;">All Courses List</h5> -->
+            <h5 class="card-title" style="font-weight: 700; font-family: 'Times New Roman', Times, serif; padding-bottom: 0px;">All Your Reported Missing Pets</h5>
             <hr>
             <div style="overflow-x: auto;">
-            <table class="table table-bordered table-striped table-hover table-checkable table-scrollable datatable">
-              <thead>
-                <tr>
-                 
-                  <th scope="col">roll_number</th>
-                  <th scope="col">lecturer_name</th>
-                  <th scope="col">course_code</th>
-                  <th scope="col">given_assignment</th>
-                  <th scope="col">submission_date</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td scope="row"><a href="#" class="text-primary">1</a></td>
-                <td scope="row"><a href="#" class="text-primary">Dr. Promise</a></td>
-                <td scope="row"><a href="#" class="text-primary">CSC404</a></td>
-                <td scope="row">Alogorithm_assignment.Docx<a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Click here to download"><i class="bi bi-download"></i></a></td>
-                <td scope="row"><a href="#" class="text-primary">21/07/2022</a></td>
-                <td><a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Delete record"><i class="bi bi-trash"></i></a><br>
-                <button class="btn btn-danger btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Export to Excel"><i class="bi bi-file-earmark-excel"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td scope="row"><a href="#" class="text-primary">2</a></td>
-                <td scope="row"><a href="#" class="text-primary">Mrs. Annie</a></td>
-                <td scope="row"><a href="#" class="text-primary">CSC412</a></td>
-                <td scope="row">WebApp_dev_assignment.PDF<a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Click here to download"><i class="bi bi-download"></i></a></td>
-                <td scope="row"><a href="#" class="text-primary">22/07/2022</a></td>
-                <td><a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Delete record"><i class="bi bi-trash"></i></a><br>
-                <button class="btn btn-danger btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Export to Excel"><i class="bi bi-file-earmark-excel"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td scope="row"><a href="#" class="text-primary">3</a></td>
-                <td scope="row"><a href="#" class="text-primary">Mrs. May Stow</a></td>
-                <td scope="row"><a href="#" class="text-primary">INF406</a></td>
-                <td scope="row">IntellectualPR_assignment.TXT<a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Click here to download"><i class="bi bi-download"></i></a></td>
-                <td scope="row"><a href="#" class="text-primary">23/07/2022</a></td>
-                <td><a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Delete record"><i class="bi bi-trash"></i></a><br>
-                <button class="btn btn-danger btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Export to Excel"><i class="bi bi-file-earmark-excel"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td scope="row"><a href="#" class="text-primary">4</a></td>
-                <td scope="row"><a href="#" class="text-primary">Mr. Okardi</a></td>
-                <td scope="row"><a href="#" class="text-primary">INF404</a></td>
-                <td scope="row">MIS_assignment.Docx<a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Click here to download"><i class="bi bi-download"></i></a></td>
-                <td scope="row"><a href="#" class="text-primary">24/07/2022</a></td>
-                <td><a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Delete record"><i class="bi bi-trash"></i></a><br>
-                <button class="btn btn-danger btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Export to Excel"><i class="bi bi-file-earmark-excel"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td scope="row"><a href="#" class="text-primary">5</a></td>
-                <td scope="row"><a href="#" class="text-primary">Mrs. Chinonye</a></td>
-                <td scope="row"><a href="#" class="text-primary">CSC406</a></td>
-                <td scope="row">CompilerDesign_assignment.PDF<a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Click here to download"><i class="bi bi-download"></i></a></td>
-                <td scope="row"><a href="#" class="text-primary">26/07/2022</a></td>
-                <td><a href="#" class="btn btn-primary btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Delete record"><i class="bi bi-trash"></i></a><br>
-                <button class="btn btn-danger btn-xxs" data-toggle="tooltip" data-placement="bottom" title="Export to Excel"><i class="bi bi-file-earmark-excel"></i></button>
-                </td>
-              </tr>
-            </tbody>
-            </table>
+              <table class="table table-bordered table-striped table-hover table-checkable table-scrollable datatable">
+                <thead>
+                  <tr>
+                   
+                    <th scope="col">Pet Id</th>
+                    <th scope="col">Owner's Name</th>
+                    <th scope="col">Owner's Email</th>
+                    <th scope="col">Owner's Phone Number</th>
+                    <th scope="col">Pet Name</th>
+                    <th scope="col">Pet Color</th>
+                    <th scope="col">Pet Type</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Pet Age</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><a href="#" class="text-primary">1001</a></th>
+                    <td class="text-primary">David</td>
+                    <td><a href="#" class="text-primary">juliusabiye@gmail.com</a></td>
+                    <td class="text-primary">08123456789</td>
+                    <td><span class="text-primary">Osama</span></td>
+                    <td><span class="text-primary">White</span></td>
+                    <td class="text-primary">Dog</td>
+                    <td><span class="text-primary">Male</span></td>
+                    <td><span class="text-primary">2 years</span></td>
+                    <td><a href="#" class="btn btn-primary btn-xxs"><i class="bi bi-pencil"></i></a><br>
+                    <button class="btn btn-danger btn-xxs"><i class="bi bi-trash"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><a href="#" class="text-primary">1005</a></th>
+                    <td class="text-primary">David</td>
+                    <td><a href="#" class="text-primary">juliusabiye@gmail.com</a></td>
+                    <td class="text-primary">08123456789</td>
+                    <td><span class="text-primary">Bull</span></td>
+                    <td><span class="text-primary">Dark Brown</span></td>
+                    <td class="text-primary">Dog</td>
+                    <td><span class="text-primary">Male</span></td>
+                    <td><span class="text-primary">3 years</span></td>
+                    <td><a href="#" class="btn btn-primary btn-xxs"><i class="bi bi-pencil"></i></a><br>
+                    <button class="btn btn-danger btn-xxs"><i class="bi bi-trash"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
 
           </div>

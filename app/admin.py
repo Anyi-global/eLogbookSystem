@@ -29,11 +29,12 @@ def admin():
 @login_required
 def admin_dashboard():
     
-    users = mongo.db.sign_up.find({}, {"_id": 0, "user_type": 1, "first_name": 1, "middle_name": 1, "last_name": 1, "matric_number": 1, "email": 1, "activation_status": 1, "signUp_date": 1})
+    users = mongo.db.signup.find({}, {"_id": 0, "username": 1, "email": 1, "registeredDate": 1})
     
     return render_template("admin/admin_dashboard.html", users=users)
 
 @app.route("/admin/admin-profile")
+@login_required
 def admin_profile():
     return render_template("admin/admin_profile.html")
 
@@ -89,31 +90,37 @@ def add_lecturer():
         
     return render_template("admin/add_lecturer.html")
 
-@app.route("/add-course", methods=["GET", "POST"])
-def add_course():
+@app.route("/add-found-pet", methods=["GET", "POST"])
+@login_required
+def add_found_pet():
     if request.method == 'POST':
         req = request.form
         
-        c_title = req["c_title"]
-        c_code = req["c_code"]
-        c_unit = req["c_unit"]
-        level = req["level"]
-        lec_name = req["lec_name"]
-        semester = req["semester"]
+        petid = req["petId"]
+        ownersname = req["ownersName"]
+        ownersemail = req["ownersEmail"]
+        ownersphoneno = req["ownersPhoneNumber"]
+        petname = req["petName"]
+        petcolor = req["petColor"]
+        pettype = req["petType"]
+        gender = req["gender"]
+        petage = req["petAge"]
         
-        mongo.db.courses.insert_one({"course_title": c_title, "course_code": c_code, "course_unit": c_unit, "level": level, "lec_name": lec_name, "semester": semester})
+        mongo.db.foundPet.insert_one({"Pet Id": petid, "Owner's Name": ownersname, "Owner's Email": ownersemail, "Owner's Phone Number": ownersphoneno, "Pet Name": petname, "Pet Color": petcolor, "Pet Type": pettype, "Gender": gender, "Pet Age": petage})
         
-        return redirect(url_for("admin_dashboard"))
+        flash("Record Added Successfully!", "success")
+        return redirect(url_for("add_found_pet"))
         
-    return render_template("admin/add_course.html")
+    return render_template("admin/add_found_pet.html")
 
 @app.route("/edit-student")
 def edit_student():
     return render_template("admin/edit_student.html")
 
-@app.route("/edit-course")
-def edit_course():
-    return render_template("admin/edit_course.html")
+@app.route("/edit-pets")
+@login_required
+def edit_pets():
+    return render_template("admin/edit_pets.html")
 
 @app.route("/edit-lecturer")
 def edit_lecturer():
@@ -123,22 +130,25 @@ def edit_lecturer():
 def all_added_students():
     return render_template("admin/all_added_students.html")
 
-@app.route("/all-added-courses")
-def all_added_courses():
-    return render_template("admin/all_added_courses.html")
+@app.route("/edit-found-pets")
+@login_required
+def edit_found_pets():
+    return render_template("admin/edit_found_pets.html")
 
 @app.route("/all-added-staff")
 def all_added_staff():
     return render_template("admin/all_added_staff.html")
 
-@app.route("/all-courses")
-def all_courses():
-    return render_template("admin/all_courses.html")
+@app.route("/all-found-pets")
+@login_required
+def all_found_pets():
+    return render_template("admin/all_found_pets.html")
 
 @app.route("/all-lecturer-view")
 def all_lecturer_view():
     return render_template("admin/all_lecturer_view.html")
 
-@app.route("/all-students-view")
-def all_students_view():
-    return render_template("admin/all_students_view.html")
+@app.route("/all-missing-pets")
+@login_required
+def all_missing_pets():
+    return render_template("admin/all_missing_pets.html")
