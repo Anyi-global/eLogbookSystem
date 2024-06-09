@@ -14,7 +14,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #dee1e6;
+  background: rgb(186, 186, 238);
   color: #444444;
 }
 
@@ -914,6 +914,23 @@ h1, h2, h3, h4, h5, h6 {
 .details span{
   color: blue;
   font-family: serif;
+}
+
+/*--------------------------------------------------------------
+# Fieldset
+--------------------------------------------------------------*/
+/* Custom fieldset styles */
+.custom-fieldset {
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Padding inside the fieldset */
+  margin-bottom: 20px; /* Margin bottom for spacing */
+}
+    
+/* Custom legend styles */
+.custom-legend {
+  font-weight: bold; /* Bold font for legend */
+  padding: 0 5px; /* Padding for legend text */
 }
 
 /*--------------------------------------------------------------

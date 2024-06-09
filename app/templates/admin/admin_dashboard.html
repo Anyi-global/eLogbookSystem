@@ -260,19 +260,8 @@
                 <div class="card-body">
                   <h5 class="card-title" style="font-weight: 700; font-family: 'Times New Roman', Times, serif; padding-bottom: 0px;">Registered Users</h5>
                   <hr>
-
                   
                       <table class="table table-border table-hover datatable">
-                        <!-- <tr class="bg-light">
-                          <th class="col">user_type</th>
-                          <th class="col">first_name</th>
-                          <th class="col">middle_name</th>
-                          <th class="col">last_name</th>
-                          <th class="col">matric_number</th>
-                          <th class="col">email</th>
-                          <th class="col">signup_date</th>
-                          <th class="col">Action</th>
-                        </tr> -->
                         {% for user in users %}
                           {% for key, value in user.items() %}
                             <tr class="bg-light">
@@ -280,13 +269,7 @@
                               <td><a href="#">{{ value }}</a></td>
                               <th scope="col">Actions</th>
                               <td><span class="badge bg-success">Approved</span></td>
-                            </tr>
-
-                            <!-- <tr>
-                              <td><a href="#">{{ user }}</a></td>
-                              <td><span class="badge bg-success">Approved</span></td>
-                            </tr> -->
-                            
+                            </tr>                            
                           {% endfor %}
                         {% endfor %}
                       </table>

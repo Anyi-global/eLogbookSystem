@@ -49,14 +49,14 @@
         <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>FUOSIS</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>E-Logbook Team</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">Ike Ifeanyi</a>
+      Designed by <a href="https://bootstrapmade.com/">Edafe Rukevwe</a>
     </div>
   </footer><!-- End Footer -->
 
@@ -75,6 +75,46 @@
 
 <!-- Template Main JS File -->
 <script src="{{ url_for('static', filename="js/main1.js") }}"></script>
+
+<script>
+  async function fetchCompanies() {
+      const response = await fetch('http://localhost:5000/api/companies');
+      const companies = await response.json();
+      const tableBody = document.getElementById('company-table-body');
+      tableBody.innerHTML = '';
+
+      companies.forEach(company => {
+          const row = document.createElement('tr');
+
+          const studentNameCell = document.createElement('td');
+          studentNameCell.scope = 'row';
+          studentNameCell.textContent = company.student_name;
+
+          const nameCell = document.createElement('td');
+          nameCell.scope = 'row';
+          const nameLink = document.createElement('a');
+          nameLink.href = "{{ url_for('stu_act_report') }}";
+          nameLink.className = 'text-primary';
+          nameLink.textContent = company.name;
+          nameCell.appendChild(nameLink);
+
+          const locationCell = document.createElement('td');
+          locationCell.scope = 'row';
+          locationCell.textContent = company.location;
+
+          row.appendChild(studentNameCell);
+          row.appendChild(nameCell);
+          row.appendChild(locationCell);
+          tableBody.appendChild(row);
+      });
+  }
+
+  // Fetch companies on page load
+  window.onload = fetchCompanies;
+
+  // Polling to check for new data every 5 seconds
+  setInterval(fetchCompanies, 5000);
+</script>
 
   </body>
 </html>

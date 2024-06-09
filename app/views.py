@@ -1,6 +1,6 @@
 from app import app, mongo
 
-from flask import render_template, request, url_for, redirect, flash, session
+from flask import jsonify, render_template, request, url_for, redirect, flash, session
 
 from werkzeug.utils import secure_filename
 
@@ -76,32 +76,116 @@ def register():
 def students_dashboard():
     return render_template("public/students_portal.html")
 
-@app.route("/add-missing-pet", methods=['GET', 'POST'])
+@app.route("/supervisor/dashboard")
 @login_required
-def add_missing_pet():
+def supervisor_dashboard():
+    return render_template("public/supervisor_portal.html")
+
+@app.route("/add-student-info", methods=['GET', 'POST'])
+@login_required
+def add_student_info():
     if request.method=='POST':
         req = request.form
         
-        ownersname = req["ownersName"]
-        ownersemail = req["ownersEmail"]
-        ownersphoneno = req["ownersPhoneNumber"]
-        petname = req["petName"]
-        petcolor = req["petColor"]
-        pettype = req["petType"]
-        gender = req["gender"]
-        petage = req["petAge"]
+        name = req["name"]
+        matric_no = req["matric_no"]
+        faculty = req["faculty"]
+        course_of_study = req["course"]
+        year_of_study = req["year"]
+        perm_address = req["address"]
+        sex = req["sex"]
+        name_of_sup = req["name_of_sup"]
+        name_of_cor = req["name_of_cor"]
         
-        mongo.db.missingPets.insert_one({"Owner's Name": ownersname, "Owner's Email": ownersemail, "Owner's Phone Number": ownersphoneno, "Pet Name": petname, "Pet Color": petcolor, "Pet Type": pettype, "Gender": gender, "Pet Age": petage})
+        mongo.db.stuPersonalInfo.insert_one({"Student Name": name, "Matric Number": matric_no, "Faculty/Department": faculty, "Course of Study": course_of_study, "Year of Study": year_of_study, "Permanent Home Address": perm_address, "Sex": sex, "Name of Industry-based Supervisor": name_of_sup, "Name of University-based Cordinator": name_of_cor})
         
         flash("Record Added Successfully!", "success")
-        return redirect(url_for("add_missing_pet"))
+        return redirect(url_for("add_student_info"))
         
-    return render_template("public/add_missing_pet.html")
+    return render_template("/public/add_student_info.html")
 
-@app.route("/all-pets-found")
+# Route to get company details
+@app.route('/api/companies', methods=['GET'])
+def get_companies():
+    companies = mongo.db.comDetails.find()
+    result = []
+    for company in companies:
+        result.append({
+            "student_name": company["Student Name"],
+            "name": company["Name of Establishment"],
+            "location": company["Location"]
+        })
+    return jsonify(result)
+
+#Route to add new company details
+@app.route("/add-com-details", methods=['GET', 'POST'])
 @login_required
-def all_pets_found():
-    return render_template("public/all_pets_found.html")
+def add_com_details():
+    if request.method=='POST':
+        req = request.form
+        
+        student_name = req["name_of_stu"]
+        name_of_est = req["name_of_est"]
+        location = req["location"]
+        job = req["job"]
+        no_of_emp = req["no_of_emp"]
+        telephone = req["telephone"]
+        
+        mongo.db.comDetails.insert_one({"Student Name": student_name, "Name of Establishment": name_of_est, "Location": location, "Job Undertaken": job, "Number of Employee": no_of_emp, "Telephone": telephone})
+        
+        flash("Record Added Successfully!", "success")
+        return redirect(url_for("add_com_details"))
+        
+    return render_template("/public/add_company_details.html")
+
+@app.route("/stu-act-report")
+@login_required
+def stu_act_report():
+    return render_template("public/student_act_report.html")
+
+# Route to add weekly activity logging
+@app.route("/weekly-activity-logging", methods=['GET', 'POST'])
+@login_required
+def weekly_activity_logging():
+    if request.method=='POST':
+        req = request.form
+        
+        name = req["name"]
+        day = req["day"]
+        date = req["date"]
+        activity = req["activity"]
+        
+        mongo.db.weeklyActivityLogging.insert_one({"Student Name": name, "Day": day, "Date": date, "Activity": activity})
+        
+        flash("Record Added Successfully!", "success")
+        return redirect(url_for("weekly_activity_logging"))
+        
+    return render_template("/public/weekly_activity_logging.html")
+
+@app.route("/weekly-activity-summary", methods=['GET', 'POST'])
+@login_required
+def weekly_activity_summary():
+    if request.method=='POST':
+        req = request.form
+        
+        job = req["job"]
+        dept = req["dept"]
+        comment = req["comment"]
+        name = req["name"]
+        weekend_date = req["weekend_date"]
+        sign = req["sign"]
+        
+        mongo.db.weeklyActivitySummary.insert_one({"Job of the Week": job, "Department Attached": dept, "Student Comment": comment, "Name of Industry-based Supervisor": name, "Date": weekend_date, "Signature": sign})
+        
+        flash("Record Added Successfully!", "success")
+        return redirect(url_for("weekly_activity_summary"))
+        
+    return render_template("/public/weekly_activity_summary.html")
+
+@app.route("/all-industries")
+@login_required
+def all_industries():
+    return render_template("public/all_industries.html")
 
 @app.route("/lecturers-profile")
 @login_required
@@ -136,12 +220,13 @@ def upload_pet_image():
     return render_template("public/upload_pet_image.html")
 
 @app.route("/sign-up", methods=["GET", "POST"])
-@login_required
+# @login_required
 def sign_up():
     if request.method=='POST':
         req = request.form
         
         username = str(req["username"])
+        usertype = str(req["usertype"])
         email = str(req["email"]).lower()
         password = req["pswd"]
         con_password = req["con_pswd"]
@@ -162,7 +247,7 @@ def sign_up():
             flash("Sorry, User with email address already exists!", "danger")
             return render_template("public/register.html")
         
-        mongo.db.signup.insert_one({"username": username, username:username, "email": email, email:email, "password": password, "activationStatus":"0", "registeredDate": nigerian_time()})
+        mongo.db.signup.insert_one({"username": username, username:username, "usertype": usertype, "email": email, email:email, "password": password, "activationStatus":"0", "registeredDate": nigerian_time()})
         flash("Account Created Successfully!", "success")
         return redirect(url_for("index"))
     else:
@@ -186,7 +271,7 @@ def login():
             return render_template("public/index.html")
         
         elif checkuser["activationStatus"] != "1":
-            flash("Account not activated. Contact Admin for account activation!", "danger")
+            flash("Account not activated! Contact Admin for account activation!!", "danger")
             return render_template("public/index.html")
         
         elif not pswd == checkuser["password"]:
@@ -197,13 +282,17 @@ def login():
             del checkuser["password"]
             session["user"] = checkuser
             session["login"]=True
-            if checkuser["username"] == "admin":
+            if checkuser["usertype"] == "Student":
                 flash("Logged in Successfully! Welcome to your Dashboard!!", "success")
-                return redirect(url_for("admin_dashboard"))
+                return redirect(url_for('students_dashboard'))
+
+            elif checkuser["usertype"] == "Supervisor":
+                flash("Logged in Successfully! Welcome to your Dashboard!!", "success")
+                return redirect(url_for('supervisor_dashboard'))
             
             else:
                 flash("Logged in Successfully! Welcome to your Dashboard!!", "success")
-                return redirect(url_for("students_dashboard"))
+                return redirect(url_for('admin_dashboard'))
     
     return render_template("public/index.html")
 

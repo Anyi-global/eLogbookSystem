@@ -1,2 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
+    <style>
+        /* Custom fieldset styles */
+        .custom-fieldset {
+            border: 1px solid #ccc; /* Border color */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px; /* Padding inside the fieldset */
+            margin-bottom: 20px; /* Margin bottom for spacing */
+        }
+    
+        /* Custom legend styles */
+        .custom-legend {
+            font-weight: bold; /* Bold font for legend */
+            padding: 0 5px; /* Padding for legend text */
+        }
+    </style>
+</head>
+<body>
+    <div class="card-body" style="margin: 20px;">
+        <h3 class="card-title text-center" style="font-family: Arial, Helvetica, sans-serif;">Company Details</h3>
+        <hr class="dropdown-divider">                     
+        <form action="{{ url_for('weekly_activity_logging') }}" method="post">
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">Day & Date</legend>
+                <label for="day" class="form-label mt-3 fw-bold">Day:</label>
+                <input type="text" class="form-control" name="day" placeholder="Enter Day" required>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">Activity</legend>
+                <textarea class="form-control" name="activity" placeholder="Enter Activity" rows="5" cols="30" required></textarea>
+            </fieldset>
+            <fieldset class="custom-fieldset">
+                <legend class="custom-legend">Details</legend>
+                <label for="details" class="form-label mt-3 fw-bold">Details:</label>
+                <input type="text" class="form-control" name="details" placeholder="Enter Details" required>
+            </fieldset>                   
+            <button type="submit" class="btn btn-primary mt-3 mx-auto d-block">Submit</button>
+        </form>
+    </div>    
+</body>
 </html>

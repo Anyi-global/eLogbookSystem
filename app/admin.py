@@ -84,7 +84,7 @@ def add_lecturer():
         qual = req["qual"]
         image = req["image"]
         
-        mongo.db.staff.insert_one({"staff_number": staff_no, "title": title, "first_name": f_name, "middle_name": m_name, "last_name": l_name, "email": email, "position": postition, "date_of_birth": dob, "state": state, "res_addr": res_addr, "gender": gender, "phone_number": phone_no, "qualification": qual, "image": image})
+        mongo.db.staff.insert_one({"staff_number": staff_no, "title": title, "first_name": f_name, "middle_name": m_name, "last_name": l_name, "email": email, "position": position, "date_of_birth": dob, "state": state, "res_addr": res_addr, "gender": gender, "phone_number": phone_no, "qualification": qual, "image": image})
         
         return redirect(url_for("admin_dashboardd"))
         

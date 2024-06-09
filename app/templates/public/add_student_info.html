@@ -166,156 +166,109 @@
 
 
   <main id="main" class="main">
-
     <div class="pagetitle">
-      <h1>Users Panel</h1>
+      <h1>Students Panel</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url_for('students_dashboard') }}"><i class="bi bi-house-fill"></i><span>Home</span></a></li>
+          <li class="breadcrumb-item"><a href="/"><i class="bi bi-house-fill"></i><span>Home</span></a></li>
           <li class="breadcrumb-item">Dashboard</li>
           <!-- <li class="breadcrumb-item active">Edit Staff</li> -->
         </ol>
       </nav>
     </div><!-- End Page Title -->
     <hr>
-
-    <div class="container mt-3">
-      <div class="row">
-          <div class="col-sm-6">
-              {% with messages = get_flashed_messages(category_filter=["success"]) %}
-                  {% if messages %}
-                      {% for message in messages %}
-                          <div class="alert alert-success alert-dismissible fade show"
-                               role="alert">
-                               <i class="bi-check-circle-fill fs-5 mx-2"></i><span><span>{{ message }}</span>
-                              <button type="button"
-                                      class="btn-close"
-                                      data-bs-dismiss="alert"
-                                      aria-label="Close"></button>
-                          </div>
-                      {% endfor %}
-                  {% endif %}
-              {% endwith %}
-          </div>
-          <div class="col-sm-6">
-              {% with messages = get_flashed_messages(category_filter=["danger"]) %}
-                  {% if messages %}
-                      {% for message in messages %}
-                          <div class="alert alert-danger alert-dismissible fade show"
-                               role="alert">
-                               <i class="bi-exclamation-octagon-fill fs-5 mx-2"></i> <span>{{ message }}</span>
-                              <button type="button"
-                                      class="btn-close"
-                                      data-bs-dismiss="alert"
-                                      aria-label="Close"></button>
-                          </div>
-                      {% endfor %}
-                  {% endif %}
-              {% endwith %}
-          </div>
-      </div>
-  </div>
-
     <section class="section dashboard">
-      <div class="row">
+        <!-- <hr class="dropdown-divider"> -->
 
+        <div class="container">
+          <div class="row">
+              <div class="col-sm-6">
+                  {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                      {% if messages %}
+                          {% for message in messages %}
+                          <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" style="font-size: medium; padding: 8px;" role="alert">
+                            <i class="bi-check-circle-fill fs-5 mx-2"></i>
+                            <span>{{ message }}</span>
+                            <button type="button" class="btn-close ms-auto" style="font-size: medium; margin-top: -4px; margin-bottom: -4px;" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        
+                          {% endfor %}
+                      {% endif %}
+                  {% endwith %}
+              </div>
+              <div class="col-sm-6">
+                  {% with messages = get_flashed_messages(category_filter=["danger"]) %}
+                      {% if messages %}
+                          {% for message in messages %}
+                              <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" style="font-size: medium; padding: 8px;"
+                                   role="alert">
+                                   <i class="bi-exclamation-octagon-fill fs-5 mx-2"></i><span>{{ message }}</span>
+                                  <button type="button" class="btn-close ms-auto" style="font-size: medium; margin-top: -4px; margin-bottom: -4px;" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                          {% endfor %}
+                      {% endif %}
+                  {% endwith %}
+              </div>
+          </div>
+        </div>
+
+      <div class="row bg-success rounded">
         <!-- Left side columns -->
         <div class="col-lg-12">
-          <div class="row">
-            <div class="card">
-              <div class="card-body">
-                <h2 class="card-title text-center fw-bold">WELCOME, <span>{{ session.user.username.title() }}</span></h2>
-                <hr>
-                <p class="card-text"><h6 class="fw-bold">Username:</h6> {{ session.user.username.title() }}</p>
-                <hr>
-                <hr>
-                <p><h6 class="fw-bold">Email:</h6> {{ session.user.email }}</p>
-                <hr>
-                <hr>
-                <a href="/student-profile" class="btn btn-primary text-white"><i class="bi bi-pencil p-2"></i>Edit Profile</a>
-              </div>
-            </div>
+          <div class="bg-white">
+            <!-- <div class="col-lg-8 mb-4">
+                <div class="card mt-4"> -->
+                    <div class="card-body">
+                      <h3 class="card-title text-center" style="font-family: Arial, Helvetica, sans-serif;">Student Personal Information</h3>
+                        <hr class="dropdown-divider">
+                        <form action="{{ url_for('add_student_info') }}" method="post">
+                            <label for="name" class="form-label mt-3 fw-bold">Name of Student:</label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name" required>
 
-            <div class="card mt-3">
-              <div class="card-body m-3">
-                <p class="card-text">Dear <strong><em>{{ session.user.username.title() }}</em></strong>, complete your tasks here using the options in the <em><strong>left pane</strong></em></p>
-              </div>
-            </div>
+                            <label for="matric_no" class="form-label mt-3 fw-bold">Matric. Number:</label>
+                            <input type="text" class="form-control" name="matric_no" placeholder="Enter Matric. Number" required>
+                            
+                            <label for="faculty" class="form-label mt-3 fw-bold">Faculty/Department:</label>
+                            <input type="text" class="form-control" name="faculty" placeholder="Enter Faculty/Department" required>
+                            
+                            <label for="course" class="form-label mt-3 fw-bold">Course of Study:</label>
+                            <input type="text" class="form-control" name="course" placeholder="Enter Your Course of Study" required>
+                            
+                            <label for="year" class="form-label mt-3 fw-bold">Year of Study:</label>
+                            <input type="number" class="form-control" name="year" placeholder="Enter Year of Study" required>
+                            
+                            <label for="address" class="form-label mt-3 fw-bold">Permanent Home Address:</label>
+                            <input type="text" class="form-control" name="address" placeholder="Enter Permanent Home Address" required>
+                            
+                            <label for="sex" class="form-label mt-3 fw-bold">Sex:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sex" id="male" value="male" required>
+                                <label class="form-check-label" for="male">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sex" id="female" value="female" required>
+                                <label class="form-check-label" for="female">
+                                    Female
+                                </label>
+                            </div>
 
+                            <label for="name_of_sup" class="form-label mt-3 fw-bold">Name of Industry-based Supervisor:</label>
+                            <input type="text" class="form-control" name="name_of_sup" placeholder="Enter Industry-based Supervisor" required>
+                            
+                            <label for="name_of_cor" class="form-label mt-3 fw-bold">Name of University-based Cordinator:</label>
+                            <input type="text" class="form-control" name="name_of_cor" placeholder="Enter University-based Cordinator" required>
+                            <button type="submit" class="btn btn-primary mt-3 mx-auto d-block">Submit</button>
+                        </form>
+                    </div>
+                  <!-- </div> -->
+            <!-- </div> -->
           </div>
         </div>
       </div>
-
-      <!-- Recent Sales -->
-      <div class="col-12">
-        <div class="card recent-sales overflow-auto mt-3">
-          <div class="card-body">
-            <h5 class="card-title" style="font-weight: 700; font-family: 'Times New Roman', Times, serif; padding-bottom: 0px;">All Supervisor's Feedbacks</h5>
-            <hr>
-            <div style="overflow-x: auto;">
-              <table class="table table-bordered table-striped table-hover table-checkable table-scrollable datatable">
-                <thead>
-                  <tr>
-                   
-                    <th scope="col">Pet Id</th>
-                    <th scope="col">Owner's Name</th>
-                    <th scope="col">Owner's Email</th>
-                    <th scope="col">Owner's Phone Number</th>
-                    <th scope="col">Pet Name</th>
-                    <th scope="col">Pet Color</th>
-                    <th scope="col">Pet Type</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Pet Age</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="#" class="text-primary">1001</a></th>
-                    <td class="text-primary">David</td>
-                    <td><a href="#" class="text-primary">juliusabiye@gmail.com</a></td>
-                    <td class="text-primary">08123456789</td>
-                    <td><span class="text-primary">Osama</span></td>
-                    <td><span class="text-primary">White</span></td>
-                    <td class="text-primary">Dog</td>
-                    <td><span class="text-primary">Male</span></td>
-                    <td><span class="text-primary">2 years</span></td>
-                    <td><a href="#" class="btn btn-primary btn-xxs"><i class="bi bi-pencil"></i></a><br>
-                    <button class="btn btn-danger btn-xxs"><i class="bi bi-trash"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#" class="text-primary">1005</a></th>
-                    <td class="text-primary">David</td>
-                    <td><a href="#" class="text-primary">juliusabiye@gmail.com</a></td>
-                    <td class="text-primary">08123456789</td>
-                    <td><span class="text-primary">Bull</span></td>
-                    <td><span class="text-primary">Dark Brown</span></td>
-                    <td class="text-primary">Dog</td>
-                    <td><span class="text-primary">Male</span></td>
-                    <td><span class="text-primary">3 years</span></td>
-                    <td><a href="#" class="btn btn-primary btn-xxs"><i class="bi bi-pencil"></i></a><br>
-                    <button class="btn btn-danger btn-xxs"><i class="bi bi-trash"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!-- End Recent Sales -->
-
     </section>
 
-  </main>
-  <!-- End #main -->
+  </main><!-- End #main -->
 
-  {% endblock %}
-  
-
-
-  
-
+{% endblock %}
