@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 CORS(app)
 
-SECRET_KEY = os.environ.get('SECRET_KEY') or "kdudlssoesxjxssopwaar"
+SECRET_KEY = os.environ.get('SECRET_KEY') or "dc0d3d20a010496beddd2c1d8a0a1dba"
 
 #app configuration
 app_settings = os.environ.get(
